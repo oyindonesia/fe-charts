@@ -12,8 +12,8 @@ the latest versions of the packages.  You can then run `helm search repo fe-char
 
 To install the Helm chart:
 
-    `helm install my-fe-chart fe-charts`
+    helm install my-fe-chart fe-charts
 
 To uninstall the chart:
 
-    `helm delete my-fe-chart`
+    helm delete my-fe-chart
