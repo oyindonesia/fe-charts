@@ -1,6 +1,0 @@
-apiVersion: v2
-name: fe-chart
-description: A Helm chart for Oy Frontend App 
-type: application
-version: 0.1.0
-appVersion: 1.0.0
