@@ -35,7 +35,13 @@ deployment:
         enabled: false
       secret:
         enabled: false
-    resources: {}
+    resources:
+      requests:
+        cpu: "250m"
+        memory: "500Mi"
+      limits:
+        cpu: "250m"
+        memory: "500Mi"
   #hostAliases provides Pod-level override of hostname resolution when DNS and other options are not applicable. This is optional, the value default to false
   hostAliases:
     enabled: false
