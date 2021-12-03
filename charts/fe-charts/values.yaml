@@ -23,7 +23,7 @@ deployment:
       periodSeconds: 5
       successThreshold: 1
       failureThreshold: 3
-    readyness:
+    readiness:
       path: /ping
       initialDelaySeconds: 1
       periodSeconds: 5
