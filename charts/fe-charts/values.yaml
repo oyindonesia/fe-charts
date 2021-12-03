@@ -1,9 +1,9 @@
 # serviceName is a service name of the service
-serviceName: 
-# containerRegistry is a repository that used to store container images 
-containerRegistry: 
+serviceName:
+# containerRegistry is a repository that used to store container images
+containerRegistry:
 # imageVersion is a service image tag
-imageVersion: 
+imageVersion:
 # revisionHistoryLimit is to specify how many old ReplicaSets for this Deployment you want to retain
 revisionHistoryLimit: 10
 
@@ -33,23 +33,30 @@ deployment:
       enabled: false
       configmap:
         enabled: false
-      secret: 
+      secret:
         enabled: false
+    resources:
+      requests:
+        cpu: "250m"
+        memory: "500Mi"
+      limits:
+        cpu: "250m"
+        memory: "500Mi"
   #hostAliases provides Pod-level override of hostname resolution when DNS and other options are not applicable. This is optional, the value default to false
-  hostAliases: 
+  hostAliases:
     enabled: false
-    hosts: 
-  
+    hosts:
+
 hpa:
   maxReplicas: 5
   minReplicas: 1
-  metrics: 
+  metrics:
 
 service:
   type: ClusterIP
   port:
   targetPort:
-  
+
 configmap:
   enabled: false
   data: {}
