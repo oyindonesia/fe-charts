@@ -58,9 +58,7 @@ service:
   targetPort:
 
 configmap:
-  enabled: false
   data: {}
 
 secret:
-  enabled: false
   data: {}
