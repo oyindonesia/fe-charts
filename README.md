@@ -16,7 +16,7 @@ To install the Helm chart:
 
     helm repo update
 
-    helm install -f values.yaml --set imageVersion=2.0.0 --set containerRegistry={container-registry-url} my-fe-chart fe-charts/fe-charts
+    helm upgrade --install --atomic --insecure-skip-tls-verify -f values.yaml --set imageVersion={image_version} --wait --timeout 300s my-fe-chart fe-charts/fe-charts
 
 To uninstall the chart:
 
