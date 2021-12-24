@@ -7,8 +7,8 @@ metadata:
     {{- if .Values.deployment.annotations }}
 {{ toYaml .Values.deployment.annotations | indent 4 }}
     {{- end }}
-    prometheus.io/scrape: true
-    prometheus.io/port: "9102"
+    # prometheus.io/scrape: "true"
+    # prometheus.io/port: "9102"
 spec:
   {{- if .Values.deployment.hostAliases.enabled }}
   hostAliases:
@@ -29,8 +29,8 @@ spec:
         {{- if .Values.deployment.annotations }}
 {{ toYaml .Values.deployment.annotations | indent 8 }}
         {{- end }}
-        prometheus.io/scrape: true
-        prometheus.io/port: "9102"
+        # prometheus.io/scrape: "true"
+        # prometheus.io/port: "9102"
       labels: 
         app: {{ .Values.serviceName }}
         {{- if .Values.deployment.podLabels }}
