@@ -4,11 +4,11 @@ metadata:
   name: {{ .Values.serviceName }}
   namespace: {{ .Release.Namespace }}
   annotations: 
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "9102"
     {{- if .Values.deployment.annotations }}
 {{ toYaml .Values.deployment.annotations | indent 4 }}
     {{- end }}
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9102"
 spec:
   {{- if .Values.deployment.hostAliases.enabled }}
   hostAliases:
@@ -26,11 +26,11 @@ spec:
   template:
     metadata:
       annotations: 
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "9102"
         {{- if .Values.deployment.annotations }}
 {{ toYaml .Values.deployment.annotations | indent 8 }}
         {{- end }}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9102"
       labels: 
         app: {{ .Values.serviceName }}
         {{- if .Values.deployment.podLabels }}
