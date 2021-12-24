@@ -26,6 +26,8 @@ spec:
   template:
     metadata:
       annotations: 
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9102"
         {{- if .Values.deployment.annotations }}
 {{ toYaml .Values.deployment.annotations | indent 8 }}
         {{- end }}
