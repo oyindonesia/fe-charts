@@ -24,12 +24,12 @@ spec:
     metadata:
       annotations:
         {{- if .Values.deployment.annotations }}
-{{ toYaml .Values.deployment.annotations | indent 8 }}
+{{ include "toYaml" .Values.deployment.annotations | indent 8 }}
         {{- end }}
       labels: 
         app: {{ .Values.serviceName }}
         {{- if .Values.deployment.podLabels }}
-{{ toYaml .Values.deployment.podLabels | indent 8 }}
+{{ include "toYaml" .Values.deployment.podLabels | indent 8 }}
         {{- end }}
     spec:
       terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
