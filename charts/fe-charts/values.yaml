@@ -8,8 +8,8 @@ imageVersion:
 revisionHistoryLimit: 10
 
 deployment:
-  podLabels: 
-  annotations: 
+  podLabels:
+  annotations:
   terminationGracePeriodSeconds: 60
   rollingUpdate:
     maxSurge: 1
