@@ -26,11 +26,10 @@ spec:
         {{- with .Values.deployment.annotations }}
 {{ toYaml . | indent 8 }}
         {{- end }}
-      labels: 
+      labels:
         app: {{ .Values.serviceName }}
         {{- with .Values.deployment.podLabels }}
 {{ toYaml . | indent 8 }}
-        {{- end }}
     spec:
       terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
       containers: 
