@@ -19,10 +19,6 @@ spec:
       app: {{ .Values.serviceName }}
   template:
     metadata:
-      annotations: 
-#         {{- if .Values.deployment.annotations }}
-# {{ toYaml .Values.deployment.annotations | indent 8 }}
-#         {{- end }}
       labels: 
         app: {{ .Values.serviceName }}
         {{- if .Values.deployment.podLabels }}
