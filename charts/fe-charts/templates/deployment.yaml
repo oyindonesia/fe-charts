@@ -4,8 +4,9 @@ metadata:
   name: {{ .Values.serviceName }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "9102"
+    {{- with .Values.deployment.annotations }}
+{{ toYaml . | indent 4 }}
+    {- end }}
 spec:
   {{- if .Values.deployment.hostAliases.enabled }}
   hostAliases:
