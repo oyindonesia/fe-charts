@@ -23,14 +23,13 @@ spec:
   template:
     metadata:
       annotations:
-        {{- if .Values.deployment.annotations }}
-{{ toYaml .Values.deployment.annotations | nindent 8 }}
+        {{- with .Values.deployment.annotations }}
+{{ toYaml . | indent 8 }}
         {{- end }}
-      labels: 
+      labels:
         app: {{ .Values.serviceName }}
-        {{- if .Values.deployment.podLabels }}
-{{ toYaml .Values.deployment.podLabels | nindent 8 }}
-        {{- end }}
+        {{- with .Values.deployment.podLabels }}
+{{ toYaml . | indent 8 }}
     spec:
       terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
       containers: 
