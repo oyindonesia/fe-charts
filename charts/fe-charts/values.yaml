@@ -9,6 +9,7 @@ revisionHistoryLimit: 10
 
 deployment:
   podLabels: {}
+  annotations: {}
   terminationGracePeriodSeconds: 60
   rollingUpdate:
     maxSurge: 1
