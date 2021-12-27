@@ -3,7 +3,7 @@ serviceName:
 # containerRegistry is a repository that used to store container images
 containerRegistry:
 # imageVersion is a service image tag
-imageVersion:
+imageVersion: dinamic
 # revisionHistoryLimit is to specify how many old ReplicaSets for this Deployment you want to retain
 revisionHistoryLimit: 10
 
