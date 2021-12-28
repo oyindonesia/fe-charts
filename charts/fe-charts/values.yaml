@@ -23,7 +23,7 @@ deployment:
       path: /ping
       initialDelaySeconds: 15
       periodSeconds: 20
-    readyness:
+    readiness:
       path: /ping
       initialDelaySeconds: 15
       periodSeconds: 10
