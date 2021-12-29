@@ -63,7 +63,7 @@ hpa:
           averageValue: 500Mi
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 3000
   targetPort: 3000
 
