@@ -34,14 +34,12 @@ spec:
         {{- end }}
     spec:
       terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
-      {{- if .Values.deployment.dnsConfig.enabled }}  
       dnsConfig:
         nameservers:
         {{- with .Values.deployment.dnsConfig.nameservers }}
 {{ toYaml . | indent 8 }}
         {{- end }}
       dnsPolicy: {{ .Values.deployment.dnsPolicy }}
-      {{- end }}
       containers: 
         - name: {{ .Values.serviceName }}
           image: {{ .Values.containerRegistry }}/{{ .Values.serviceName }}:{{ .Values.imageVersion }}
