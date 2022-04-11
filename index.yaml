@@ -14,6 +14,16 @@ entries:
   fe-charts:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2022-04-11T08:21:06.446586796Z"
+    description: A Helm chart for Oy Frontend App
+    digest: 195b1383916c19e4e985d480c5af952f1276c93056323d05906ad2285afd7ba4
+    name: fe-charts
+    type: application
+    urls:
+    - https://github.com/oyindonesia/fe-charts/releases/download/fe-charts-0.3.7/fe-charts-0.3.7.tgz
+    version: 0.3.7
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2022-04-11T06:38:58.037389828Z"
     description: A Helm chart for Oy Frontend App
     digest: e48a0dcb58614dad523dc784f6b3a4dc361fdf32d8904516488f276cc32fcd5c
@@ -282,4 +292,4 @@ entries:
     urls:
     - https://github.com/oyindonesia/fe-charts/releases/download/fe-charts-0.1.0/fe-charts-0.1.0.tgz
     version: 0.1.0
-generated: "2022-04-11T06:38:58.038328335Z"
+generated: "2022-04-11T08:21:06.447183819Z"
