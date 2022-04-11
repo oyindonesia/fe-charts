@@ -14,7 +14,7 @@ deployment:
     prometheus.io/port: "9102"
   terminationGracePeriodSeconds: 60
   dnsConfig:
-    nameservers:
+    enabled: false
   dnsPolicy: None
   rollingUpdate:
     maxSurge: 1
