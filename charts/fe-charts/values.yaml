@@ -1,0 +1,78 @@
+# serviceName is a service name of the service
+serviceName:
+# containerRegistry is a repository that used to store container images
+containerRegistry:
+# imageVersion is a service image tag
+imageVersion: dinamic
+# revisionHistoryLimit is to specify how many old ReplicaSets for this Deployment you want to retain
+revisionHistoryLimit: 10
+
+deployment:
+  podLabels:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9102"
+  terminationGracePeriodSeconds: 60
+  dnsConfig:
+    enabled: false
+  dnsPolicy: None
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+  containers:
+    portName: http
+    containerPort: 3000
+    liveness:
+      path: /ping
+      initialDelaySeconds: 15
+      periodSeconds: 20
+    readiness:
+      path: /ping
+      initialDelaySeconds: 15
+      periodSeconds: 10
+    env:
+      enabled: false
+      configmap:
+        enabled: false
+      secret:
+        enabled: false
+    resources:
+      requests:
+        cpu: "250m"
+        memory: "500Mi"
+      limits:
+        cpu: "250m"
+        memory: "500Mi"
+  #hostAliases provides Pod-level override of hostname resolution when DNS and other options are not applicable. This is optional, the value default to false
+  hostAliases:
+    enabled: false
+    hosts:
+
+hpa:
+  maxReplicas: 2
+  minReplicas: 1
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: 500Mi
+
+service:
+  type: ClusterIP
+  port: 3000
+  targetPort: 3000
+
+configmap:
+  data: {}
+
+secret:
+  isSealedSecrets: false
+  data: {}

@@ -1,3 +1,4 @@
+# fe-charts ( Frontend Helm Charts)
 ## Usage
 
 [Helm](https://helm.sh) must be installed to use the charts.  Please refer to
@@ -12,7 +13,9 @@ the latest versions of the packages.  You can then run `helm search repo fe-char
 
 To install the Helm chart:
 
-    helm install my-fe-chart fe-charts
+    helm repo update
+
+    helm upgrade --install --atomic --insecure-skip-tls-verify -f values.yaml --set imageVersion={image_version} --wait --timeout 300s my-fe-chart fe-charts/fe-charts
 
 To uninstall the chart:
 

@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.serviceName }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- with .Values.deployment.annotations }}
+{{ toYaml . | indent 4 }}
+    {{- end }}
+spec:
+  {{- if .Values.deployment.hostAliases.enabled }}
+  hostAliases:
+{{ toYaml .Values.deployment.hostAliases.hosts | indent 2 }}
+  {{- end }}
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.rollingUpdate.maxUnavailable }}
+    type: RollingUpdate
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: {{ .Values.serviceName }}
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.deployment.annotations }}
+{{ toYaml . | indent 8 }}
+        {{- end }}
+      labels:
+        app: {{ .Values.serviceName }}
+        {{- with .Values.deployment.podLabels }}
+{{ toYaml . | indent 8 }}
+        {{- end }}
+    spec:
+      terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
+      {{- if .Values.deployment.dnsConfig.enabled }}  
+      dnsConfig:
+        nameservers:
+        {{- with .Values.deployment.dnsConfig.nameservers }}
+{{ toYaml . | indent 8 }}
+        {{- end }}
+      dnsPolicy: {{ .Values.deployment.dnsPolicy }}
+      {{- end }}
+      containers: 
+        - name: {{ .Values.serviceName }}
+          image: {{ .Values.containerRegistry }}/{{ .Values.serviceName }}:{{ .Values.imageVersion }}
+          ports:
+            - name: {{ .Values.deployment.containers.portName }}
+              containerPort: {{ .Values.deployment.containers.containerPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.deployment.containers.liveness.path }}
+              port: {{ .Values.deployment.containers.portName }}
+            initialDelaySeconds: {{ .Values.deployment.containers.liveness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.deployment.containers.liveness.initialDelaySeconds }}
+            successThreshold: {{ .Values.deployment.containers.liveness.successThreshold }}
+            failureThreshold: {{ .Values.deployment.containers.liveness.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.deployment.containers.readiness.path }}
+              port: {{ .Values.deployment.containers.portName }}
+            initialDelaySeconds: {{ .Values.deployment.containers.readiness.initialDelaySeconds }}
+            periodSeconds: {{ .Values.deployment.containers.readiness.periodSeconds }}
+            successThreshold: {{ .Values.deployment.containers.readiness.successThreshold }}
+            failureThreshold: {{ .Values.deployment.containers.readiness.failureThreshold }}
+          resources:
+            limits:
+              cpu: {{ .Values.deployment.containers.resources.limits.cpu }}
+              memory: {{ .Values.deployment.containers.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.deployment.containers.resources.requests.cpu }}
+              memory: {{ .Values.deployment.containers.resources.requests.memory }}
+          {{- if .Values.deployment.containers.env.enabled }}  
+          envFrom:  
+            {{- if .Values.deployment.containers.env.configmap.enabled }}  
+          - configMapRef:
+              name: {{ .Values.serviceName }}-configmap
+            {{- end }}
+            {{- if .Values.deployment.containers.env.secret.enabled }}  
+          - secretRef:
+              name: {{ .Values.serviceName }}-secret
+            {{- end }}
+          {{- end }}
+        {{- if .Values.deployment.additionalContainers }}
+{{ toYaml .Values.deployment.additionalContainers | indent 8 }}      
+        {{- end }}
