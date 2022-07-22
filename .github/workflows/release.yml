@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - update_cr
 
 jobs:
   release:
