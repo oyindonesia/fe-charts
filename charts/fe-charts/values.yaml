@@ -74,4 +74,5 @@ configmap:
   data: {}
 
 secret:
+  isSealedSecrets: false
   data: {}
