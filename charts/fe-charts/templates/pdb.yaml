@@ -1,4 +1,4 @@
-{{- if .Values.deployment.containers.env.pdb.enabled }}
+{{- if .Values.pdb.enabled }}
 
 apiVersion: policy/v1
 kind: PodDisruptionBudget
