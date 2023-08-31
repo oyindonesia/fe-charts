@@ -65,6 +65,10 @@ hpa:
           type: AverageValue
           averageValue: 500Mi
 
+pdb:
+  enabled: false
+  minAvailable: 1
+
 service:
   type: ClusterIP
   port: 3000
