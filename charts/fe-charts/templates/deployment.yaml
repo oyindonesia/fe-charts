@@ -42,7 +42,7 @@ spec:
         {{- end }}
       dnsPolicy: {{ .Values.deployment.dnsPolicy }}
       {{- end }}
-      serviceAccountName: {{ .Release.Name }}-serviceaccount
+      serviceAccountName: {{ .Values.serviceName }}-serviceaccount
       containers: 
         - name: {{ .Values.serviceName }}
           image: {{ .Values.containerRegistry }}/{{ .Values.serviceName }}:{{ .Values.imageVersion }}
