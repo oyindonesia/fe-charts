@@ -30,10 +30,6 @@ deployment:
       path: /ping
       initialDelaySeconds: 15
       periodSeconds: 10
-    securityContext:
-      runAsUser: 1000
-      runAsNonRoot: true
-      readOnlyRootFilesystem: true
     env:
       enabled: false
       configmap:
@@ -77,9 +73,6 @@ service:
   type: ClusterIP
   port: 3000
   targetPort: 3000
-
-serviceaccount:
-  create: false
 
 configmap:
   data: {}
