@@ -30,6 +30,8 @@ deployment:
       path: /ping
       initialDelaySeconds: 15
       periodSeconds: 10
+    securityContext:
+      enabled: false
     env:
       enabled: false
       configmap:
@@ -80,3 +82,6 @@ configmap:
 secret:
   isSealedSecrets: false
   data: {}
+
+serviceaccount:
+  create: false
