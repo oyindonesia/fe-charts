@@ -42,7 +42,6 @@ spec:
         {{- end }}
       dnsPolicy: {{ .Values.deployment.dnsPolicy }}
       {{- end }}
-      serviceAccountName: {{ .Values.serviceName }}-serviceaccount
       containers: 
         - name: {{ .Values.serviceName }}
           image: {{ .Values.containerRegistry }}/{{ .Values.serviceName }}:{{ .Values.imageVersion }}
@@ -66,12 +65,6 @@ spec:
             periodSeconds: {{ .Values.deployment.containers.readiness.periodSeconds }}
             successThreshold: {{ .Values.deployment.containers.readiness.successThreshold }}
             failureThreshold: {{ .Values.deployment.containers.readiness.failureThreshold }}
-          {{- if .Values.deployment.containers.securityContext.enabled }}
-          securityContext:
-            runAsUser: {{ .Values.deployment.containers.securityContext.runAsUser }}
-            runAsNonRoot: {{ .Values.deployment.containers.securityContext.runAsNonRoot }}
-            readOnlyRootFilesystem: {{ .Values.deployment.containers.securityContext.readOnlyRootFilesystem }}
-          {{- end }}
           resources:
             limits:
               cpu: {{ .Values.deployment.containers.resources.limits.cpu }}
