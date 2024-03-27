@@ -74,6 +74,9 @@ spec:
             runAsNonRoot: {{ .Values.deployment.containers.securityContext.runAsNonRoot }}
             readOnlyRootFilesystem: {{ .Values.deployment.containers.securityContext.readOnlyRootFilesystem }}
           {{- end }}
+          volumeMounts:
+            - name: tmp-volume
+              mountPath: /tmp
           resources:
             limits:
               cpu: {{ .Values.deployment.containers.resources.limits.cpu }}
@@ -95,3 +98,6 @@ spec:
         {{- if .Values.deployment.additionalContainers }}
 {{ toYaml .Values.deployment.additionalContainers | indent 8 }}      
         {{- end }}
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}
