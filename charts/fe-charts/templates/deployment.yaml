@@ -48,6 +48,7 @@ spec:
       containers: 
         - name: {{ .Values.serviceName }}
           image: {{ .Values.containerRegistry }}/{{ .Values.serviceName }}:{{ .Values.imageVersion }}
+          imagePullPolicy: {{ .Values.deployment.containers.imagePullPolicy | default "IfNotPresent" }}
           ports:
             - name: {{ .Values.deployment.containers.portName }}
               containerPort: {{ .Values.deployment.containers.containerPort }}
