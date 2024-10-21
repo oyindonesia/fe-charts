@@ -33,6 +33,18 @@ spec:
 {{ toYaml . | indent 8 }}
         {{- end }}
     spec:
+      {{- if and .Values.podAntiAffinity.enabled .Values.serviceName }}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - {{ .Values.serviceName }}
+            topologyKey: "kubernetes.io/hostname"
+      {{- end }}
       terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
       {{- if .Values.deployment.dnsConfig.enabled }}  
       dnsConfig:
