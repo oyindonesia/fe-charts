@@ -85,3 +85,6 @@ secret:
 
 serviceaccount:
   create: false
+
+podAntiAffinity:
+  enabled: false
