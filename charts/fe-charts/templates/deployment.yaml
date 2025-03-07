@@ -57,7 +57,13 @@ spec:
       {{- if .Values.serviceaccount.create}}
       serviceAccountName: {{ .Values.serviceName }}-serviceaccount
       {{- end }}
-      containers: 
+      {{- if .Values.deployment.imagePullSecrets }}
+      imagePullSecrets:
+        {{- with .Values.deployment.imagePullSecrets }}
+{{ toYaml . | indent 8 }}
+        {{- end }}
+      {{- end }}
+      containers:
         - name: {{ .Values.serviceName }}
           image: {{ .Values.containerRegistry }}/{{ .Values.serviceName }}:{{ .Values.imageVersion }}
           imagePullPolicy: {{ .Values.deployment.containers.imagePullPolicy | default "IfNotPresent" }}
