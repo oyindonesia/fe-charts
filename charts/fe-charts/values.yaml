@@ -66,8 +66,8 @@ hpa:
       resource:
         name: memory
         target:
-          type: AverageValue
-          averageValue: 500Mi
+          type: Utilization
+          averageUtilization: 75
 
 pdb:
   enabled: false
