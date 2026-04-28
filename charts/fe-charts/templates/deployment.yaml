@@ -89,9 +89,12 @@ spec:
             failureThreshold: {{ .Values.deployment.containers.readiness.failureThreshold }}
           {{- if .Values.deployment.containers.securityContext.enabled }}
           securityContext:
+            allowPrivilegeEscalation: {{ .Values.deployment.containers.securityContext.allowPrivilegeEscalation }}
             runAsUser: {{ .Values.deployment.containers.securityContext.runAsUser }}
             runAsNonRoot: {{ .Values.deployment.containers.securityContext.runAsNonRoot }}
             readOnlyRootFilesystem: {{ .Values.deployment.containers.securityContext.readOnlyRootFilesystem }}
+            capabilities:
+              {{- toYaml .Values.deployment.containers.securityContext.capabilities | indent 14 }}
           {{- end }}
           volumeMounts:
             - name: tmp-volume

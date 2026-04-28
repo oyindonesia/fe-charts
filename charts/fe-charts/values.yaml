@@ -32,6 +32,10 @@ deployment:
       periodSeconds: 10
     securityContext:
       enabled: false
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
     env:
       enabled: false
       configmap:
